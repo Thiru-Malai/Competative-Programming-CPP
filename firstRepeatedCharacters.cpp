@@ -15,6 +15,7 @@ int main()
     int arr[26] = { 0 };
     string s;
     cin >> s;
+    int flag = 0;
     for (int i = 0; i < (int)s.size(); i++)
     {
         char c = tolower(s[i]);
@@ -26,7 +27,11 @@ int main()
         else
         {
             cout << s[i];
+            flag = 1;
             break;
         }
     }
+    if(!flag)
+        cout<<"No Repeating Characters";
+    return 0;
 }

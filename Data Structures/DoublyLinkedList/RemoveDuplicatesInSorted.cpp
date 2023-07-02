@@ -65,8 +65,6 @@ int main(){
     insert(&head, 3);
     insert(&head, 3);
     insert(&head, 4);
-
-
     print(head);
 
     Node* resHead = removeDuplicates(head);

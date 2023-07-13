@@ -18,35 +18,37 @@
 //  Output: [0,0,9,0,0]
 
 
-vector<int> productExceptSelf(vector<int>& v) {
-    int n = v.size();
-    int count = 0, prod = 1;
-    for(int i = 0; i < n; i++){
-        if(v[i] == 0){
-            count++;
-        }
-        if(count == 2){
-            fill(v.begin(), v.end(), 0);
-            return v;
-        }
-        if(v[i] != 0){
-            prod*=v[i];
-        }
-    }
-    if(count == 1){
-        for(int i = 0; i < n; i++){
-            if(v[i] != 0){
-                v[i] = 0;
-            }
-            else{
-                v[i] = prod;
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> posofzeros;
+        vector<int> res(nums.size(), 0);
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] == 0){
+                posofzeros.push_back(i);
             }
         }
-    }
-    else if(count == 0){
-        for(int i = 0; i < n; i++){
-                v[i] = prod / v[i];
+        int prod = 1;
+        if(posofzeros.size() == 0){
+            for(int i = 0; i < nums.size(); i++){
+                prod*=nums[i];
+            }
+            for(int i = 0; i < nums.size(); i++){
+                res[i] = prod/nums[i];
+            }
+            return res;
+        }
+        if(posofzeros.size() == 1){
+            for(int i = 0; i < nums.size(); i++){
+                if(posofzeros[0] != i){
+                    prod*=nums[i];
+                }
+            }
+            res[posofzeros[0]] = prod;
+            return res;
+        }
+        else{
+            return res;
         }
     }
-    return v;
-}
+};
